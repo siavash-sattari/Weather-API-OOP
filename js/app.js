@@ -1,4 +1,8 @@
-let weatherData = new Weather("tehran");
+// Variables
+
+let storage = new Storage();
+let city = storage.getCityFromLS();
+let weatherData = new Weather(city);
 let ui = new UI();
 
 // Load Content
@@ -22,7 +26,8 @@ function getWeather() {
       document.querySelector("#city").value = "";
     })
     .catch((err) => {
-      alert("Please serach for a valid city!");
+      localStorage.clear();
+      alert("Please serach a valid city!");
       document.querySelector("#city").value = "";
     });
 }
@@ -32,4 +37,5 @@ function changeCity() {
   weatherData.chageCity(city);
   getWeather();
   $("#showModals").modal("hide");
+  storage.setCityToLs(city);
 }
